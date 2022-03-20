@@ -1,0 +1,68 @@
+{
+  "name": "dental-front",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build --no-module",
+    "lint": "vue-cli-service lint",
+    "prepare": "husky install",
+    "prettier": "prettier --write \"./src/**/*.{js,vue,ts}\""
+  },
+  "dependencies": {
+    "@stomp/stompjs": "^6.1.2",
+    "@vue/composition-api": "^1.4.0",
+    "@vuelidate/core": "^2.0.0-alpha.28",
+    "@vuelidate/validators": "^2.0.0-alpha.20",
+    "axios": "^0.21.1",
+    "core-js": "^3.6.5",
+    "dayjs": "^1.10.7",
+    "inversify": "^5.1.1",
+    "inversify-binding-decorators": "^4.0.0",
+    "lodash": "^4.17.21",
+    "pinia": "^2.0.3",
+    "portal-vue": "^2.1.7",
+    "query-string": "^7.0.1",
+    "reflect-metadata": "^0.1.13",
+    "svg-sprite-loader": "^6.0.7",
+    "vue": "^2.6.14",
+    "vue-demi": "^0.12.1",
+    "vue-router": "^3.5.2",
+    "vue-toastification": "1.7.11",
+    "vuetify": "^2.4.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.5",
+    "@types/lodash": "^4.14.168",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
+    "@vue/cli-plugin-babel": "~5.0.3",
+    "@vue/cli-plugin-eslint": "~5.0.3",
+    "@vue/cli-plugin-router": "~5.0.3",
+    "@vue/cli-plugin-typescript": "~5.0.3",
+    "@vue/cli-service": "~5.0.3",
+    "@vue/eslint-config-typescript": "^9.1.0",
+    "@vue/runtime-dom": "^3.2.31",
+    "babel-loader": "^8.2.3",
+    "eslint": "^8.4.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.2.0",
+    "husky": "^7.0.0",
+    "lint-staged": "^12.1.2",
+    "openapi-typescript-codegen": "^0.10.0",
+    "prettier": "^2.2.1",
+    "sass": "^1.32.11",
+    "sass-loader": "^12.4.0",
+    "typescript": "~4.5.5",
+    "vue-loader": "^15.9.8",
+    "vue-template-compiler": "^2.6.14"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+@import "~vue-toastification/dist/index.css";
+
+.mm-toast {
+  background-color: #fff;
+  color: var(--color-dark);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.18), 0 26px 58px rgba(0, 0, 0, 0.22);
+  border-radius:4px;
+  padding: 10px 20px;
+  font-family: 'Roboto';
+  align-items: center;
+  min-height: 60px;
+}
+
+.Vue-Toastification__close-button {
+  color: inherit;
+  width: 20px;
+  height: 20px;
+  margin-right: -10px;
+  margin-left: 10px;
+  margin-bottom: 12px;
+  padding: 0;
+  opacity: 1;
+}
+
+.Vue-Toastification__close-button svg {
+  width: 15px;
+  height: 15px;
+}
+
+.Vue-Toastification__toast-body {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.Vue-Toastification__toast--default .Vue-Toastification__icon {
+  color: var(--color-gray);
+}
+
+.Vue-Toastification__toast--success .Vue-Toastification__icon {
+  color: var(--color-green);
+}
+
+.Vue-Toastification__toast--info .Vue-Toastification__icon {
+  color: var(--color-blue);
+}
+
+.Vue-Toastification__toast--error .Vue-Toastification__icon {
+  color: var(--color-primary-red);
+}
+
+.Vue-Toastification__toast--warning .Vue-Toastification__icon {
+  color: var(--color-grape);
+}

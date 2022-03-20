@@ -1,0 +1,26 @@
+.v-input .v-label {
+  font-size: var(--font-size-small);
+}
+
+.v-text-field--outlined.v-input--dense .v-label {
+  top: 15px;
+}
+
+.v-text-field--outlined.v-input--dense .v-label--active {
+  transform: translateY(-21px) scale(.75);
+}
+
+/*.v-input__prepend-inner {*/
+/*  margin: 0 !important;*/
+/*}*/
+
+.v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__append-inner,
+.v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__append-outer,
+.v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__prepend-inner,
+.v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__prepend-outer,
+.v-text-field--full-width.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__append-inner,
+.v-text-field--full-width.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__append-outer,
+.v-text-field--full-width.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__prepend-inner,
+.v-text-field--full-width.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__prepend-outer {
+  margin-top: 12px;
+}
