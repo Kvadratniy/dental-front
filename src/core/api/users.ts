@@ -17,6 +17,13 @@ export class UsersApi {
       url: `${URL}/all`,
     });
   }
+
+  getUserById(id: string) {
+    return this.http.request({
+      method: 'GET',
+      url: `${URL}/${id}`,
+    });
+  }
 }
 
 container

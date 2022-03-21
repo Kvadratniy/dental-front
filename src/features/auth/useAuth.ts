@@ -17,14 +17,25 @@ const AUTH_KEY = 'token';
 
 export default function useAuth() {
   const api = container.get<AuthApi>(AUTH_API_SERVICE_ID);
+  const router = useRouter();
 
-  const login = async () => {
-    const token = await api.login({
-      "email": "super@user.ru",
-      "password": "super"
-    });
+  const login = async (email, password) => {
+    try {
+      const token = await api.login({
+        email,
+        password
+      });
+      window.localStorage.setItem(AUTH_KEY, token.token);
+      router.push('/');
+    } catch (e) {
+      console.log(e)
+    }
 
-    window.localStorage.setItem(AUTH_KEY, token.token);
+    // const token = await api.login({
+    //   "email": "super@user.ru",
+    //   "password": "super"
+    // });
+
   };
 
   const logout = () => {

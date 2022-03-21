@@ -5,13 +5,19 @@
         <thead>
           <tr>
             <th class="text-left">
-              Иня
+              №
             </th>
             <th class="text-left">
-              Почта
+              Дата создания
             </th>
             <th class="text-left">
-              Баланс
+              Менеджер
+            </th>
+            <th class="text-left">
+              Скидка
+            </th>
+            <th class="text-left">
+              Сумма
             </th>
           </tr>
         </thead>
@@ -19,11 +25,12 @@
           <tr
             v-for="item in items"
             :key="item.name"
-            @click="router.push({ name: 'user', params: { id: item.id }})"
           >
-            <td>{{ item.firstName }} {{item.lastName}}</td>
-            <td>{{ item.email }}</td>
-            <td>{{ item.purse.balance }}</td>
+            <td>{{ item.id }}</td>
+            <td>{{ item.creationDate }}</td>
+            <td>{{ item.responsibleManager.firstName }} {{ item.responsibleManager.lastName}}</td>
+            <td>{{ item.discount.sale }}</td>
+            <td>{{ item.total }}</td>
           </tr>
         </tbody>
       </template>
@@ -32,24 +39,22 @@
 </template>
 
 <script lang="ts">
-import container from '../../di';
+import container from '@/di';
 import {
-  UsersApi,
-  USERS_API_SERVICE_ID,
-} from '../../core/api/users';
+  SalesApi,
+  SALES_API_SERVICE_ID,
+} from '@/core/api/sales';
 import { defineComponent, onMounted, ref } from '@vue/composition-api';
 import { useRouter } from '@/router/composition';
 
-
 export default defineComponent({
-
   setup() {
     const router = useRouter();
     const items = ref<any>([]);
-    const api = container.get<UsersApi>(USERS_API_SERVICE_ID);
+    const api = container.get<SalesApi>(SALES_API_SERVICE_ID);
 
     onMounted(async () => {
-      items.value = await api.getAllUsers();
+      items.value = await api.getSales();
     });
 
     return {

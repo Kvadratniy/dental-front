@@ -6,22 +6,26 @@ export async function authMiddleware(
   from: Route,
   next: any
 ): Promise<void> {
-  if (to.matched.every((record) => !record.meta?.hasAuth)) {
-    next();
-    return;
-  }
+  console.log(from);
+  console.log(to);
+  // if (to.matched.every((record) => !record.meta?.hasAuth)) {
+  //   next();
+  //   return;
+  // }
 
-  if (!isAuthenticated.value) {
-    try {
-      await checkAccess();
-      next();
-      return;
-    } catch (e) {
-      console.error(e);
-      next({ name: 'auth' });
-      return;
-    }
-  }
+  // debugger
+  // if (!isAuthenticated.value) {
+  //   debugger
+  //   try {
+  //     await checkAccess();
+  //     next();
+  //     return;
+  //   } catch (e) {
+  //     console.error(e);
+  //     next({ name: 'auth' });
+  //     return;
+  //   }
+  // }
 
   next();
 }

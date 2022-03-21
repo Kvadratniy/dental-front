@@ -14,7 +14,7 @@ const opts = {
         background: '#292930'
       },
     },
-    dark: true,
+    light: true,
   },
 };
 export default new Vuetify(opts);

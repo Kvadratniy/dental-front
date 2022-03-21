@@ -1,5 +1,6 @@
 <template>
-  <v-app light>
+  <div :class="$style.app">
+    <v-app light>
     <v-main>
       <v-form
           ref="form"
@@ -30,7 +31,7 @@
               x-large
               outlined
               color="#DF9F46"
-              @click="login"
+              @click="login(email, password)"
             >
               Войти
             </v-btn>
@@ -38,6 +39,7 @@
         </v-form>
     </v-main>
   </v-app>
+  </div>
 </template>
 
 <script lang="ts">
@@ -85,7 +87,7 @@ export default defineComponent({
   background-position: center;
 }
 
-:global .theme--dark.v-application {
+.app :global .theme--dark.v-application {
   background: var(--color-dark);
 }
 
