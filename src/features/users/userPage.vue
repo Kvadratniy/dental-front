@@ -17,6 +17,7 @@ export default defineComponent({
 
   setup(param, { root }) {
     const router = useRouter();
+    debugger
     const user = ref<any>({});
     const api = container.get<UsersApi>(USERS_API_SERVICE_ID);
 

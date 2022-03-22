@@ -4,9 +4,9 @@
       v-model="drawer"
       app
     >
-      <v-list-item dark>
+      <v-list-item color="success" dark>
         <v-list-item-content>
-          <v-list-item-title class="text-h6">
+          <v-list-item-title >
             Dr. Tochiev
           </v-list-item-title>
           <v-list-item-subtitle>
@@ -30,7 +30,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title :class="$style.title">{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -51,7 +51,6 @@
 
       <!-- Provides the application the proper gutter -->
       <v-container fluid >
-
         <!-- If using vue-router -->
         <router-view></router-view>
       </v-container>
@@ -74,8 +73,8 @@ import { useRouter } from '@/router/composition';
     const router = useRouter();
     const items = ref([
       { title: 'Продажи', icon: 'mdi-view-dashboard', name: 'sales' },
-      { title: 'Скидки', icon: 'mdi-image', name: 'discounts' },
-      { title: 'Пользователи', icon: 'mdi-help-box', name: 'users' },
+      { title: 'Скидки', icon: 'mdi-bookmark', name: 'discounts' },
+      { title: 'Пользователи', icon: 'mdi-account-supervisor', name: 'users' },
     ]);
 
     const navigate = (name) => {
@@ -100,11 +99,19 @@ import { useRouter } from '@/router/composition';
 
 .app :global {
   .theme--light.v-navigation-drawer {
+    padding: 33px 20px 13px 20px;
+    box-shadow: 10px 20px 27px rgb(0 0 0 / 5%);
     background-color: var(--color-dark);
   }
 
   .theme--dark.v-application {
     background-color: var(--color-dark);
+  }
+
+  .v-list-item__title {
+    font-family: 'Montserrat';
+    color: #FFF;
+    // color: var(--color-dark);
   }
 }
 

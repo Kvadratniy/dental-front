@@ -30,11 +30,11 @@ const routes: RouteConfig[] = [
         component: () => import('@/features/users/usersPage.vue'),
       },
       {
-        path: '/user',
+        path: '/profile',
         name: 'user',
-        component: () => import('@/features/users/userPage.vue'),
         children: [
           {
+            name: 'user-profile',
             path: ':id',
             component: () => import('@/features/users/userPage.vue'),
           }
@@ -57,6 +57,7 @@ const routes: RouteConfig[] = [
 const configService = container.get<ConfigService>(CONFIG_SERVICE_ID);
 
 const router = new VueRouter({
+  mode: 'history',
   base: configService.baseUrl,
   routes,
 });

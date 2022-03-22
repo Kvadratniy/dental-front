@@ -4,12 +4,34 @@
   --color-dark: #17222F;
   --color-white: #F4F5FA;
   --color-primary: #6D8097;
-  --color-orange: #DF9F46
+  --color-orange: #de9f45;
+  --color-dark-orange: #cc7800;
+}
+
+.theme--light.v-icon {
+  color: var(--color-dark)
+}
+
+.theme--light.v-data-table {
+  border-radius: 4px;
+}
+
+.theme--light.v-data-table.v-data-table--fixed-header thead th {
+  font-family: 'Montserrat';
+  color: var(--color-dark-orange) !important;
+}
+
+.v-breadcrumbs__item {
+  font-size: 14px;
+  font-family: 'Montserrat';
 }
 
 .theme--dark.v-application {
   background-color: var(--color-white);
   color: var(--color-dark)
+}
+.theme--light.v-navigation-drawer:not(.v-navigation-drawer--floating) .v-navigation-drawer__border {
+  background-color: transparent !important;
 }
 /* 
 .theme--dark .v-application {

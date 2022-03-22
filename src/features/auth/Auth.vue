@@ -11,6 +11,7 @@
           <div :class="$style.logo"></div>
           <div>
             <v-text-field
+              dark
               v-model="email"
               :counter="10"
               label="E-mail"
@@ -24,6 +25,7 @@
               type="password"
               autocomplete="new-password"
               outlined
+              dark
             ></v-text-field>
             <v-btn
               depressed
@@ -87,7 +89,7 @@ export default defineComponent({
   background-position: center;
 }
 
-.app :global .theme--dark.v-application {
+.app :global .v-main__wrap {
   background: var(--color-dark);
 }
 

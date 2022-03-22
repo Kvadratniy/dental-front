@@ -70,8 +70,6 @@ export default defineComponent({
   margin: 20px;
   padding: 20px;
   border-radius: 8px;
-  -webkit-box-shadow: 0px 0px 17px 3px rgba(34, 60, 80, 0.19);
-  -moz-box-shadow: 0px 0px 17px 3px rgba(34, 60, 80, 0.19);
-  box-shadow: 0px 0px 17px 3px rgba(34, 60, 80, 0.19);
+  box-shadow: 0px 20px 27px rgb(0 0 0 / 5%);
 }
 </style>

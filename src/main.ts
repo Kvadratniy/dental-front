@@ -8,6 +8,7 @@ import router from '@/router/router';
 import '@/assets/css/base.css';
 import '@/assets/css/global.css';
 import '@/assets/styles/app.css'
+import '@/assets/css/fonts.css';
 
 Vue.config.productionTip = false;
 
