@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
-import '@/assets/css/vuetify.scss';
 
 Vue.use(Vuetify);
 const opts = {

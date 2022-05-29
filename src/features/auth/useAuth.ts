@@ -1,11 +1,4 @@
-import { reactive, ref } from '@vue/composition-api';
-import { useToast } from '@/core/composition/useToast';
-import useVuelidate from '@vuelidate/core';
-import { required, minLength } from '@vuelidate/validators';
-
-import { login } from '@/core/auth';
 import { useRouter } from '@/router/composition';
-import { getHTTPError } from '@/core/utils/errors';
 
 import container from '../../di';
 import {
@@ -30,31 +23,26 @@ export default function useAuth() {
     } catch (e) {
       console.log(e)
     }
-
-    // const token = await api.login({
-    //   "email": "super@user.ru",
-    //   "password": "super"
-    // });
-
   };
 
   const logout = () => {
     localStorage.removeItem(AUTH_KEY);
+    router.push('/auth');
   };
 
+  const registration = async (data) => {
+    await api.registration(data);
+  };
 
-
-
-
-
-
-
-
-
-  // const v$ = useVuelidate(rules, state);
+  const getCurrentUser = () => {
+    return api.getCurrentUser();
+  }
 
   return {
+    AUTH_KEY,
     login,
-    logout
+    registration,
+    logout,
+    getCurrentUser,
   };
 }

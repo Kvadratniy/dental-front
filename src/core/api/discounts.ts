@@ -14,7 +14,38 @@ export class DiscountsApi {
   getAllDiscounts() {
     return this.http.request({
       method: 'GET',
-      url: `${URL}`,
+      url: `${URL}/all`,
+    });
+  }
+
+  // Получить скидку
+  getDiscountById(id: string) {
+    return this.http.request({
+      method: 'GET',
+      url: `${URL}/${id}`,
+    });
+  }
+
+  createDiscount(data) {
+    return this.http.request({
+      method: 'POST',
+      url: `${URL}/create`,
+      data,
+    });
+  }
+
+  getQrCode() {
+    return this.http.request({
+      method: 'GET',
+      url: `${URL}/code`,
+    });
+  }
+
+  subscribeUserById(id, data) {
+    return this.http.request({
+      method: 'PUT',
+      url: `${URL}/${id}/add-sub`,
+      data,
     });
   }
 }

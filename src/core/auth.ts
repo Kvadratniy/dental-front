@@ -1,43 +1,41 @@
 import { ref } from '@vue/composition-api';
+import container from '@/di';
+import {
+  AuthApi,
+  AUTH_API_SERVICE_ID,
+} from '@/core/api/auth';
 
 const isAuthenticated = ref(false);
+const user = ref<any>(null);
 
 export const AUTH_KEY = 'token';
 
-const login = async (data) => {
-  const token = createToken(data);
-  await loadData(token);
-  window.localStorage.setItem(AUTH_KEY, token);
-};
-
-const logout = async () => {
-  window.localStorage.removeItem(AUTH_KEY);
-};
-
 const checkAccess = async () => {
+  const api = container.get<AuthApi>(AUTH_API_SERVICE_ID);
   const token = window.localStorage.getItem(AUTH_KEY);
-
   if (!token) {
-    throw false;
+    return false;
   }
 
-  await loadData(token);
+  try {
+    user.value = await api.getCurrentUser();
+    console.log(user.value);
+    isAuthenticated.value = true;
+    return true;
+  } catch (err) {
+    isAuthenticated.value = false;
+    return false;
+  }
 };
 
-export const loadData = async (token: string) => {
-  // const userStore = useUserStore();
-  // const shopStore = useShopStore();
+const pagesForRoles = {
+  manager: ['account'],
+  administrator: ['account', 'sales', 'sale'],
+  director: ['users', 'create-user', 'sales', 'sale', 'create-discount', 'discounts', 'account', 'user-subs', 'services', 'create-service']
+}
 
-  // await Promise.all([userStore.getUser(token), shopStore.getShop(token)]);
-
-  isAuthenticated.value = true;
+const hasPermissionsNeeded = (to) => {
+  return pagesForRoles[user.value.role].includes(to.name)
 };
 
-const createToken = (data) => {
-  return (
-    'Basic ' +
-    `${btoa(unescape(encodeURIComponent(`${data.username}:${data.password}`)))}`
-  );
-};
-
-export { login, logout, checkAccess, isAuthenticated };
+export { checkAccess, isAuthenticated, user, hasPermissionsNeeded };

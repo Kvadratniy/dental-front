@@ -1,139 +1,123 @@
 <template>
-  <div>
-    <div style="margin: 10px 20px;adding: 16px;">
-      <v-breadcrumbs
-        :items="breadcrumbs"
-        large
-      ></v-breadcrumbs>
-    </div>
-
-    <div :class="$style.container">
-
+  <page-container :breadcrumbs="breadcrumbs">
+    <template #header>
       <h4 :class="$style.title">
         <v-icon
           color="#DF9F46"
         >
           mdi-wallet-giftcard
         </v-icon>
-        <span style="margin-left: 10px;">Список активных скидок</span>
+        <span style="margin-left: 10px;">Список скидок</span>
       </h4>
-      <!-- <v-menu
-        v-model="menu"
-        :close-on-content-click="false"
-        :nudge-right="40"
-        transition="scale-transition"
-        offset-y
-        min-width="auto"
+      <v-btn
+        dark
+        depressed
+        color="#DF9F46"
+        @click="router.push({ name: 'create-discount' })"
       >
-        <template v-slot:activator="{ on, attrs }">
-          <v-text-field
-            v-model="date"
-            label="Дата"
-            prepend-icon="mdi-calendar"
-            readonly
-            v-bind="attrs"
-            v-on="on"
-          ></v-text-field>
+        Новая скидка
+      </v-btn>
+    </template>
+
+    <template #content>
+      <v-data-table
+        fixed-header
+        :headers="headers"
+        :items="items"
+        :items-per-page="15"
+        @click:row="onClickRow"
+      >
+        <template #item.creationDate="{ value }">
+          {{ formatDate(value) }}
         </template>
-        <v-date-picker
-          v-model="date"
-          :landscape="false"
-          @input="menu = false"
-        ></v-date-picker>
-      </v-menu> -->
-      <template>
-        <v-data-table
-          fixed-header
-          :headers="headers"
-          :items="items"
-          :items-per-page="15"
-        ></v-data-table>
-      </template>
-    </div>
-  </div>
+
+        <template #item.endDate="{ value }">
+          {{ formatDate(value) }}
+        </template>
+
+        <template #item.sale="{ value }">
+          {{ value }} %
+        </template>
+        <template #item.delete>
+        <!-- <v-btn
+          dark
+          depressed
+          color="#df4646"
+          small
+          block
+        >
+          Удалить
+        </v-btn> -->
+        </template>
+      </v-data-table>
+    </template>
+  </page-container>
 </template>
 
 <script lang="ts">
-import container from '../../di';
-import {
-  DiscountsApi,
-  DISCOUNTS_API_SERVICE_ID,
-} from '../../core/api/discounts';
 import { defineComponent, onMounted, ref } from '@vue/composition-api';
+import pageContainer from '@/core/components/page-container.vue';
 import { useRouter } from '@/router/composition';
-
+import { formatDate } from '@/core/filters/date';
+import useBreadcrumbs from '../../core/composition/useBreadcrumbs';
+import useDiscounts from '../../core/composition/useDiscounts';
 
 export default defineComponent({
+  components: { pageContainer },
 
   setup() {
     const router = useRouter();
-    const items = ref<any>([]);
     const date = ref(null);
     const menu = ref(false)
-    const api = container.get<DiscountsApi>(DISCOUNTS_API_SERVICE_ID);
-    const breadcrumbs = [
-      {
-        text: 'DENTAL CLUB',
-        disabled: true,
-        href: '',
-      },
-      {
-        text: 'СКИДКИ',
-        disabled: true,
-        href: 'discounts',
-      },
-    ]
-    const headers = [
-      {
-        text: '№',
-        align: 'start',
-        sortable: false,
-        value: 'id',
-      },
-      { text: 'Дата создания', value: 'creationDate' },
-      { text: 'Дата окончания действия', value: 'endDate' },
-      { text: 'Скидка', value: 'sale' },
-    ];
+    const img = ref<any>(null);
+
+    const {
+      breadcrumbs,
+    } = useBreadcrumbs(['DENTAL CLUB', 'СКИДКИ']);
+
+    const {
+      headers,
+      items,
+      loadDiscounts,
+    } = useDiscounts();
+
+    const onClickRow = (item) => {
+      router.push({
+        name: 'user-subs',
+        params: {
+          id: item.id,
+        },
+      });
+    }
 
     onMounted(async () => {
-      items.value = await api.getAllDiscounts();
+      await loadDiscounts();
     });
+    
 
     return {
+      img,
       date,
       menu,
       headers,
       items,
       router,
       breadcrumbs,
+      formatDate,
+      onClickRow,
     }
   }
 });
 </script>
 
 <style module lang="scss">
-.container {
-  margin: 0 20px 20px;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: -10px -20px 27px rgb(0 0 0 / 5%);
-}
-
 .title {
-  padding: 0 0 16px 0;
   font-family: 'Montserrat';
   font-size: 14px;
   color: var(--color-dark);
-  border-bottom: 2px solid #DF9F46;
   font-weight: 900;
   margin-bottom: 0px;
   display: flex;
   align-items: center;
 }
-
-.header {
-  font-family: 'Montserrat';
-  color: var(--color-dark) !important;
-}
-
 </style>

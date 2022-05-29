@@ -5,15 +5,15 @@
         <v-icon
           color="#DF9F46"
         >
-          mdi-account-box
+          mdi-database
         </v-icon>
-        <span style="margin-left: 10px;">Список пользователей</span>
+        <span style="margin-left: 10px;">Список услуг</span>
       </h4>
       <v-btn
         dark
         depressed
         color="#DF9F46"
-        @click="router.push({ name: 'create-user' })"
+        @click="router.push({ name: 'create-service' })"
       >
         Создать
       </v-btn>
@@ -22,15 +22,12 @@
       <v-data-table
         fixed-header
         :headers="headers"
-        :items="users"
+        :items="services"
         :items-per-page="15"
       >
-        <template #item.firstName="{ item }">
-          {{ item.firstName }} {{ item.lastName }}
-        </template>
-        <template #item.balance="{ value }">
-          {{ formatPrice(value) }}
-        </template>
+      <template #item.cost="{ value }">
+        {{ formatPrice(value) }}
+      </template>
       </v-data-table>
     </template>
   </page-container>
@@ -41,7 +38,7 @@ import { defineComponent, onMounted } from '@vue/composition-api';
 import pageContainer from '@/core/components/page-container.vue';
 import { useRouter } from '@/router/composition';
 import useBreadcrumbs from '../../core/composition/useBreadcrumbs';
-import useUser from './composition/useUser';
+import useServices from './composition/useServices';
 import { formatPrice } from '@/core/filters/price';
 
 export default defineComponent({
@@ -52,13 +49,13 @@ export default defineComponent({
 
     const {
       breadcrumbs,
-    } = useBreadcrumbs(['DENTAL CLUB', 'ПОЛЬЗОВАТЕЛЬ']);
+    } = useBreadcrumbs(['DENTAL CLUB', 'УСЛУГИ']);
 
     const {
       headers,
-      users,
-      loadUsers,
-    } = useUser();
+      services,
+      loadServices
+    } = useServices();
 
     // const onClickRow = (item) => {
     //   router.push({
@@ -70,16 +67,15 @@ export default defineComponent({
     // }
 
     onMounted(async () => {
-      await loadUsers();
+      await loadServices();
     });
 
     return {
       breadcrumbs,
       headers,
-      users,
+      services,
       router,
-      formatPrice,
-      // onClickRow,
+      formatPrice
     }
   }
 });

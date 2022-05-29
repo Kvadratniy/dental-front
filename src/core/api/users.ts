@@ -11,6 +11,7 @@ export class UsersApi {
     private http: HttpService
   ) {}
 
+  // Все пользователи
   getAllUsers() {
     return this.http.request({
       method: 'GET',
@@ -18,10 +19,34 @@ export class UsersApi {
     });
   }
 
-  getUserById(id: string) {
+  // Получить пользователя
+  getUserById(id: string|number) {
     return this.http.request({
       method: 'GET',
       url: `${URL}/${id}`,
+    });
+  }
+
+  // Получить текущего пользователя
+  getCurrentUser() {
+    return this.http.request({
+      method: 'GET',
+      url: `${URL}/current`,
+    });
+  }
+
+  // Список скидок текущего пользователя
+  getUserDiscounts(id) {
+    return this.http.request({
+      method: 'GET',
+      url: `${URL}/discounts/${id}`,
+    });
+  }
+
+  getCurrentUserDiscounts() {
+    return this.http.request({
+      method: 'GET',
+      url: `${URL}/discounts`,
     });
   }
 }

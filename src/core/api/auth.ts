@@ -19,12 +19,19 @@ export class AuthApi {
     });
   }
 
-  register(data) {
+  registration(data) {
     return this.http.request({
       method: 'POST',
       url: `${URL}/registration`,
       data,
     });
+  }
+
+  getCurrentUser() {
+    return this.http.request({
+      method: 'GET',
+      url: `${URL}/user/current`,
+    })
   }
 }
 

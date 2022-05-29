@@ -1,40 +1,32 @@
 import container, { Injectable, Inject } from '@/di';
 import HttpService, { HTTP_SERVICE_ID } from '@/core/http';
-const URL = '/api/sales';
+const URL = '/api/services';
 
-export const SALES_API_SERVICE_ID = Symbol('SalesApiService');
+export const SERVICES_API_SERVICE_ID = Symbol('ServicesApiService');
 
 @Injectable()
-export class SalesApi {
+export class ServicesApi {
   constructor(
     @Inject(HTTP_SERVICE_ID)
     private http: HttpService
   ) {}
 
-  getSales() {
+  getServices() {
     return this.http.request({
       method: 'GET',
-      url: `${URL}`,
+      url: `${URL}/all`,
     });
   }
 
-  createSale(data) {
+  createService(data) {
     return this.http.request({
       method: 'POST',
       url: `${URL}`,
       data,
     });
   }
-
-  completeSale(data) {
-    return this.http.request({
-      method: 'PUT',
-      url: `${URL}/complete`,
-      data,
-    });
-  }
 }
 
 container
-  .bind<SalesApi>(SALES_API_SERVICE_ID)
-  .to(SalesApi);
+  .bind<ServicesApi>(SERVICES_API_SERVICE_ID)
+  .to(ServicesApi);
