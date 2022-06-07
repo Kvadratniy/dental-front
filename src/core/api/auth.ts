@@ -1,7 +1,7 @@
 import container, { Injectable, Inject } from '@/di';
 import HttpService, { HTTP_SERVICE_ID } from '@/core/http';
 
-const URL = '/api/';
+const URL = '/api';
 export const AUTH_API_SERVICE_ID = Symbol('AuthApiService');
 
 @Injectable()
