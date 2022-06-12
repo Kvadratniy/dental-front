@@ -15,8 +15,13 @@
 import { QrcodeStream } from 'vue-qrcode-reader'
 
 export default {
-
   components: { QrcodeStream },
+  props: {
+    writeoff: {
+      type: Boolean,
+      default: false
+    }
+  },
 
   data () {
     return {
@@ -42,13 +47,23 @@ export default {
     },
 
     async onDecode (content) {
-      const res = content.split('discount?')[1];
-      const [user, sale] = res.split('&');
-      this.pause();
-      await this.timeout(500);
-      if (user && sale) {
-        this.$emit('create', user, sale);
+      if (this.writeoff) {
+        const res = content.split('purse?user=')[1];
+        this.pause();
+        await this.timeout(500);
+        if (res) {
+          this.$emit('create', res);
+        }
+      } else {
+        const res = content.split('discount?')[1];
+        const [user, sale] = res.split('&');
+        this.pause();
+        await this.timeout(500);
+        if (user && sale) {
+          this.$emit('create', user, sale);
+        }
       }
+
       this.unpause()
     },
 

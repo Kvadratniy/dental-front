@@ -35,6 +35,7 @@
               outlined
               rounded
               small
+              @click="isShowModal = true"
             >
               Списать баллы
             </v-btn>
@@ -100,13 +101,22 @@
             </v-card>
           </v-col>
         </v-row>
+
+        <Modal v-if="isShowModal" @close="isShowModal = false">
+          <span>
+            Для списания накопленных баллов, покажите этот QR код администратору клиники
+          </span>
+          <div style="display:flex; justify-content: center;">
+            <v-img :src="writeoffQr" style="max-width: 300px"/>
+          </div>
+        </Modal>
       </v-container>
     </template>
   </page-container>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from '@vue/composition-api';
+import { defineComponent, onMounted, ref } from '@vue/composition-api';
 import pageContainer from '@/core/components/page-container.vue';
 import { useRouter } from '@/router/composition';
 import useBreadcrumbs from '@/core/composition/useBreadcrumbs';
@@ -115,12 +125,15 @@ import useCurrentUser from '@/core/composition/useUser';
 import { formatDate } from '@/core/filters/date';
 import { downloadFile } from '@/core/utils/files';
 import { formatPrice } from '@/core/filters/price';
+import Modal from '@/core/components/modal.vue';
+import useWriteoff from '@/features/writeoff/composition/useWriteoff';
 
 export default defineComponent({
-  components: { pageContainer },
+  components: { pageContainer, Modal },
 
   setup() {
     const router = useRouter();
+    const isShowModal = ref(false);
 
     const {
       breadcrumbs,
@@ -132,7 +145,12 @@ export default defineComponent({
       managers,
     } = useUser();
 
-    const {user} = useCurrentUser();
+    const {
+      writeoffQr,
+      loadWriteoffQr,
+    } = useWriteoff();
+
+    const { user } = useCurrentUser();
 
     const upload = (src) => {
       downloadFile(src, '123')
@@ -140,13 +158,16 @@ export default defineComponent({
 
     onMounted(async () => {
       await loadUserDiscounts();
+      await loadWriteoffQr();
     })
 
     return {
       user,
       breadcrumbs,
+      writeoffQr,
       discounts,
       router,
+      isShowModal,
       formatDate,
       formatPrice,
       upload,

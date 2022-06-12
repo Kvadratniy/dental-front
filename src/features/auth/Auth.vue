@@ -15,7 +15,6 @@
               v-model="email"
               :counter="10"
               label="E-mail"
-              autocomplete="username"
               outlined
             ></v-text-field>
 
@@ -23,7 +22,6 @@
               v-model="password"
               label="Password"
               type="password"
-              autocomplete="new-password"
               outlined
               dark
             ></v-text-field>

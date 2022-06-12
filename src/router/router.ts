@@ -34,28 +34,17 @@ const routes: RouteConfig[] = [
         name: 'create-user',
         component: () => import('@/features/users/registrationPage.vue'),
       },
-
       {
         path: '/user/:id',
         name: 'user-subs',
         props: true,
         component: () => import('@/features/users/subscribesPage.vue'),
       },
-      // ПРОДАЖИ
       {
         path: '/sales',
         name: 'sales',
         component: () => import('@/features/sales/salesPage.vue'),
       },
-
-      // {
-      //   path: '/sale',
-      //   name: 'sale',
-      //   props: true,
-      //   component: () => import('@/features/sales/createSale.vue'),
-      // },
-
-
       {
         path: '/discounts',
         name: 'discounts',
@@ -73,24 +62,27 @@ const routes: RouteConfig[] = [
           }
         ]
       },
-
       {
         path: '/account',
         name: 'account',
         component: () => import('@/features/users/accountPage.vue'),
       },
-
       {
         path: '/services',
         name: 'services',
         props: true,
         component: () => import('@/features/services/servicesPage.vue'),
       },
-
       {
         path: '/service',
         name: 'create-service',
         component: () => import('@/features/services/createService.vue'),
+      },
+      {
+        path: '/writeoff',
+        name: 'writeoff',
+        props: true,
+        component: () => import('@/features/writeoff/writeoffPage.vue'),
       },
     ]
   },

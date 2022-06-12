@@ -30,8 +30,8 @@ const checkAccess = async () => {
 
 const pagesForRoles = {
   manager: ['account'],
-  administrator: ['account', 'sales', 'sale'],
-  director: ['users', 'create-user', 'sales', 'sale', 'create-discount', 'discounts', 'account', 'user-subs', 'services', 'create-service']
+  administrator: ['account', 'sales', 'sale', 'writeoff'],
+  director: ['users', 'create-user', 'sales', 'sale', 'create-discount', 'discounts', 'account', 'user-subs', 'services', 'create-service', 'writeoff']
 }
 
 const hasPermissionsNeeded = (to) => {

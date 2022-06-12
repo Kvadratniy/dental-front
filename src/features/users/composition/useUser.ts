@@ -46,7 +46,10 @@ export default function useUser() {
 
   const loadUserDiscounts = async () => {
     discounts.value = await api.getCurrentUserDiscounts();
-    
+  }
+
+  const getUserById = async (id) => {
+    return api.getUserById(id);
   }
 
   return {
@@ -57,5 +60,6 @@ export default function useUser() {
     discounts,
     loadUsers,
     loadUserDiscounts,
+    getUserById,
   }
 }

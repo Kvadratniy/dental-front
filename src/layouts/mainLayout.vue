@@ -88,6 +88,7 @@ import useAuth from '@/features/auth/useAuth';
       { title: 'Визиты', icon: 'mdi-view-dashboard', name: 'sales', roles: ['director', 'administrator']},
       { title: 'Скидки', icon: 'mdi-bookmark', name: 'discounts', roles: ['director']},
       { title: 'Пользователи', icon: 'mdi-account-supervisor', name: 'users', roles: ['director']},
+      { title: 'Списания', icon: 'mdi-briefcase-upload', name: 'writeoff', roles: ['director', 'administrator']},
       { title: 'Услуги', icon: 'mdi-database', name: 'services', roles: ['director']},
       { title: 'Аккаунт', icon: 'mdi-archive', name: 'account', roles: ['manager', 'director', 'administrator']},
     ]);
